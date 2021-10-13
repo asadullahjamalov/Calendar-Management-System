@@ -25,7 +25,6 @@ public class ColorTypeServiceImpl implements ColorTypeService {
 
     @Override
     public ColorTypeResponseDto createColorType(ColorTypeRequestDto requestDto) {
-        System.out.println(requestDto);
         return colorTypeMapper.entityToResponseDto(colorTypeRepo.save(colorTypeMapper.requestDtoToEntity(requestDto)));
     }
 
