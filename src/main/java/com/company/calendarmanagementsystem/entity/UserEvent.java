@@ -1,18 +1,24 @@
 package com.company.calendarmanagementsystem.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class UserEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private LocalDate date;
     private Boolean wasRead = false;
     private Boolean wasDeleted;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    private Event event;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_type_id", referencedColumnName = "id")
+    private EventType eventType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "color_type_id", referencedColumnName = "id")
+    private ColorType colorType;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -21,11 +27,14 @@ public class UserEvent {
     public UserEvent() {
     }
 
-    public UserEvent(Long id, Boolean wasRead, Boolean wasDeleted, Event event, User user) {
+    public UserEvent(Long id, LocalDate date, Boolean wasRead, Boolean wasDeleted,
+                     EventType eventType, ColorType colorType, User user) {
         this.id = id;
+        this.date = date;
         this.wasRead = wasRead;
         this.wasDeleted = wasDeleted;
-        this.event = event;
+        this.eventType = eventType;
+        this.colorType = colorType;
         this.user = user;
     }
 
@@ -53,12 +62,28 @@ public class UserEvent {
         this.wasDeleted = wasDeleted;
     }
 
-    public Event getEvent() {
-        return event;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public ColorType getColorType() {
+        return colorType;
+    }
+
+    public void setColorType(ColorType colorType) {
+        this.colorType = colorType;
     }
 
     public User getUser() {

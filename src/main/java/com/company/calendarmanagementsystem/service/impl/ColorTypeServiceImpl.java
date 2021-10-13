@@ -25,8 +25,8 @@ public class ColorTypeServiceImpl implements ColorTypeService {
 
     @Override
     public ColorTypeResponseDto createColorType(ColorTypeRequestDto requestDto) {
-        return colorTypeMapper.entityToResponseDto(
-                colorTypeRepo.save(colorTypeMapper.requestDtoToEntity(requestDto)));
+        System.out.println(requestDto);
+        return colorTypeMapper.entityToResponseDto(colorTypeRepo.save(colorTypeMapper.requestDtoToEntity(requestDto)));
     }
 
     @Override
@@ -50,6 +50,8 @@ public class ColorTypeServiceImpl implements ColorTypeService {
                         new ExceptionResponse("Color type not found", 404)));
         colorType.setColorType(requestDto.getColorType());
         colorType.setActivationDay(requestDto.getActivationDay());
+        colorType.setDefault(requestDto.isDefault());
+        colorType.setHolidayOrWeekend(requestDto.isHolidayOrWeekend());
         return colorTypeMapper.entityToResponseDto(colorTypeRepo.save(colorType));
     }
 

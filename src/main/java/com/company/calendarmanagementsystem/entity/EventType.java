@@ -11,17 +11,22 @@ public class EventType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String eventType;
+    private boolean isHoliday;
+    private boolean isWeekend;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventType", fetch = FetchType.LAZY)
-    private List<Event> events;
+    private List<UserEvent> userEvents;
 
     public EventType() {
     }
 
-    public EventType(long id, String eventType, List<Event> events) {
+    public EventType(long id, String eventType, boolean isHoliday,
+                     boolean isWeekend, List<UserEvent> userEvents) {
         this.id = id;
         this.eventType = eventType;
-        this.events = events;
+        this.isHoliday = isHoliday;
+        this.isWeekend = isWeekend;
+        this.userEvents = userEvents;
     }
 
     public long getId() {
@@ -40,12 +45,28 @@ public class EventType {
         this.eventType = eventType;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public boolean isHoliday() {
+        return isHoliday;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
+    public void setHoliday(boolean holiday) {
+        isHoliday = holiday;
+    }
+
+    public boolean isWeekend() {
+        return isWeekend;
+    }
+
+    public void setWeekend(boolean weekend) {
+        isWeekend = weekend;
+    }
+
+    public List<UserEvent> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(List<UserEvent> userEvents) {
+        this.userEvents = userEvents;
     }
 }
 

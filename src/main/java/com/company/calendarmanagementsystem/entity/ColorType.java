@@ -11,18 +11,23 @@ public class ColorType {
     private long id;
     private String colorType;
     private Integer activationDay;
+    private boolean isDefault;
+    private boolean isHolidayOrWeekend;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colorType", fetch = FetchType.LAZY)
-    private List<Event> events;
+    private List<UserEvent> userEvents;
 
     public ColorType() {
     }
 
-    public ColorType(long id, String colorType, Integer activationDay, List<Event> events) {
+    public ColorType(long id, String colorType, Integer activationDay, boolean isDefault,
+                     boolean isHolidayOrWeekend, List<UserEvent> userEvents) {
         this.id = id;
         this.colorType = colorType;
         this.activationDay = activationDay;
-        this.events = events;
+        this.isDefault = isDefault;
+        this.isHolidayOrWeekend = isHolidayOrWeekend;
+        this.userEvents = userEvents;
     }
 
     public long getId() {
@@ -49,11 +54,27 @@ public class ColorType {
         this.activationDay = activationDay;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public boolean isDefault() {
+        return isDefault;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    public boolean isHolidayOrWeekend() {
+        return isHolidayOrWeekend;
+    }
+
+    public void setHolidayOrWeekend(boolean holidayOrWeekend) {
+        isHolidayOrWeekend = holidayOrWeekend;
+    }
+
+    public List<UserEvent> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(List<UserEvent> userEvents) {
+        this.userEvents = userEvents;
     }
 }
