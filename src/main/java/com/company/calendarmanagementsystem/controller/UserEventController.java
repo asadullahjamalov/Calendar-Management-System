@@ -37,6 +37,13 @@ public class UserEventController {
         return new ResponseEntity<>(userEventService.getAllUserEvents(token.substring(7)), HttpStatus.OK);
     }
 
+    @GetMapping("/{userEventId}")
+    public ResponseEntity<UserEventResponseDto> getUserEventById(@RequestHeader("Authorization") String token,
+                                                    @PathVariable Long userEventId) {
+        log.info("Getting User Event by id");
+        return new ResponseEntity<>(userEventService.getUserEventById(token.substring(7), userEventId), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{userEventId}")
     public ResponseEntity<Void> deleteUserEventById(@RequestHeader("Authorization") String token,
                                                     @PathVariable Long userEventId) {
