@@ -1,6 +1,7 @@
 package com.company.calendarmanagementsystem.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -12,16 +13,20 @@ public class User {
     private String surname;
     private String username;
     private String password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<UserEvent> userEvents;
 
     public User() {
     }
 
-    public User(long id, String name, String surname, String username, String password) {
+    public User(long id, String name, String surname, String username,
+                String password, List<UserEvent> userEvents) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
+        this.userEvents = userEvents;
     }
 
     public long getId() {
@@ -62,5 +67,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<UserEvent> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(List<UserEvent> userEvents) {
+        this.userEvents = userEvents;
     }
 }
