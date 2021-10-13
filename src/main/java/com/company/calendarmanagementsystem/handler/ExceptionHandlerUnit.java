@@ -1,9 +1,6 @@
 package com.company.calendarmanagementsystem.handler;
 
-import com.company.calendarmanagementsystem.exception.ColorTypeNotFound;
-import com.company.calendarmanagementsystem.exception.EventTypeNotFound;
-import com.company.calendarmanagementsystem.exception.UserNotFound;
-import com.company.calendarmanagementsystem.exception.UsernameIsNotUnique;
+import com.company.calendarmanagementsystem.exception.*;
 import com.company.calendarmanagementsystem.model.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +9,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionHandlerUnit {
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(UserEventNotFound.class)
+    public ExceptionResponse handleUserEventNotFoundException(UserEventNotFound ex){
+        return ex.getExceptionResponse();
+    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EventTypeNotFound.class)

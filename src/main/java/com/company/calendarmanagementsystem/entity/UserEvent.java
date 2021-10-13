@@ -10,7 +10,7 @@ public class UserEvent {
     private Long id;
     private LocalDate date;
     private Boolean wasRead = false;
-    private Boolean wasDeleted;
+    private Boolean wasDeleted = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_type_id", referencedColumnName = "id")

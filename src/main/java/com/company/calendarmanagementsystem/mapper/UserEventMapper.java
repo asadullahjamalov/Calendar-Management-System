@@ -8,13 +8,15 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserEventMapper {
 
     UserEventMapper INSTANCE = Mappers.getMapper(UserEventMapper.class);
 
     @Mappings({
-            @Mapping(target = "eventType.id", source = "dto.eventTypeId"),
+            @Mapping(target = "eventType.id", source = "dto.eventTypeId")
     })
     UserEvent requestDtoToEntity(UserEventRequestDto dto);
 
@@ -26,4 +28,6 @@ public interface UserEventMapper {
             @Mapping(target = "color", source = "colorType.colorType")
     })
     UserEventResponseDto entityToResponseDto(UserEvent entity);
+
+    List<UserEventResponseDto> entityListToResponseDtoList(List<UserEvent> entityList);
 }
